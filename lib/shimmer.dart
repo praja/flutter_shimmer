@@ -63,11 +63,13 @@ class Shimmer extends StatefulWidget {
   final Gradient gradient;
   final int loop;
   final bool enabled;
+  final List<double> gradientStops;
 
   const Shimmer({
     Key? key,
     required this.child,
     required this.gradient,
+    this.gradientStops = const <double>[0.0, 0.35, 0.5, 0.65, 1.0],
     this.direction = ShimmerDirection.ltr,
     this.period = const Duration(milliseconds: 1500),
     this.loop = 0,
@@ -84,8 +86,11 @@ class Shimmer extends StatefulWidget {
     required this.child,
     required Color baseColor,
     required Color highlightColor,
+    double highlightColorStartPoint = 0.35,
+    double highlightColorEndPoint = 0.65,
     this.period = const Duration(milliseconds: 1500),
     this.direction = ShimmerDirection.ltr,
+    this.gradientStops = const <double>[0.0, 0.35, 0.5, 0.65, 1.0],
     this.loop = 0,
     this.enabled = true,
   })  : gradient = LinearGradient(
@@ -98,13 +103,7 @@ class Shimmer extends StatefulWidget {
               baseColor,
               baseColor
             ],
-            stops: const <double>[
-              0.0,
-              0.35,
-              0.5,
-              0.65,
-              1.0
-            ]),
+            stops: gradientStops),
         super(key: key);
 
   @override
